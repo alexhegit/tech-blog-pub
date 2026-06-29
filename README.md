@@ -1,14 +1,11 @@
 # tech-blog-pub
 
-面向大众的技术科普短文（3–5 分钟阅读），适合在 LinkedIn / X / 微信等平台分享。
-想动手实践的专业读者，文末都会引流到公开的开源仓库。
+技术实践笔记的**公开发布版**：内容与原文一致，格式针对 LinkedIn / X / 微信等平台优化，
+方便转发分享。想动手实践的读者，文末都会引流到公开的开源仓库。
 
-Bite-sized, accessible tech stories (3–5 min read) made for sharing on
-LinkedIn / X / WeChat. Hands-on readers are funneled to the public open-source
-repos at the end of each piece.
-
-> 这是 [tech-blog](https://github.com/alexhegit) 的科普衍生版：同一份实践，更短、更易读。
-> The popularized companion to my deep-dive notes: same work, shorter and lighter.
+The **public release** of my engineering practice notes: same content as the
+source, format-optimized for sharing on LinkedIn / X / WeChat. Hands-on readers
+are funneled to the public open-source repos at the end of each piece.
 
 ## PhysicalAI
 
