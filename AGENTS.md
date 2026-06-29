@@ -42,7 +42,8 @@ The private deep-dive source of truth is **`tech-blog`** (not public).
   README.md            # the short post (bilingual: 中文 then English)
   assets/
     images/            # 1–3 key visuals only (copied, self-contained)
-    videos/            # optional short clip(s)
+    gifs/              # inline-playable animations (auto-play via ![]()) — preferred for motion
+    videos/            # optional full-quality MP4 (HD download link; not inline on GitHub)
   social/
     linkedin.md        # ready-to-paste LinkedIn post
     x-thread.md        # ready-to-paste X/Twitter thread
@@ -56,8 +57,10 @@ The private deep-dive source of truth is **`tech-blog`** (not public).
 
 Given a deep-dive post (in `tech-blog`) or raw project notes:
 
-1. Create `(<category>)/<slug>/assets/{images,videos}/` and `social/`.
+1. Create `(<category>)/<slug>/assets/{images,gifs,videos}/` and `social/`.
 2. Copy the 1–3 strongest visuals into `assets/` (do NOT hotlink the private repo).
+   For motion, embed a lean **GIF** inline (auto-plays everywhere, incl. WeChat);
+   keep the full MP4 as an HD download link below it.
 3. Write `README.md` (3–5 min read):
    - H1 hook title (zh) + en subtitle; language switch + read-time line.
    - One lead image near the top.

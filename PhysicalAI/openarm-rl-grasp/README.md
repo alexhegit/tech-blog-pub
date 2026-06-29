@@ -63,7 +63,9 @@
 ➡️ **代码与复现**：[UniLab 仓库](https://github.com/unilabsim/UniLab) ·
 [本任务的 PR #640](https://github.com/unilabsim/UniLab/pull/640)
 
-🎬 [夹爪动作特写视频](assets/videos/play_closeup_leftfront.mp4)
+![夹爪动作特写](assets/gifs/play_closeup_leftfront.gif)
+
+🎬 完整视频（高清）：[play_closeup_leftfront.mp4](assets/videos/play_closeup_leftfront.mp4)
 
 ---
 
@@ -135,4 +137,6 @@ reproduce training, evaluation, and video recording with a single command:
 ➡️ **Code & repro**: [UniLab repo](https://github.com/unilabsim/UniLab) ·
 [PR #640 for this task](https://github.com/unilabsim/UniLab/pull/640)
 
-🎬 [Close-up of the gripper in action](assets/videos/play_closeup_leftfront.mp4)
+![Close-up of the gripper in action](assets/gifs/play_closeup_leftfront.gif)
+
+🎬 Full video (HD): [play_closeup_leftfront.mp4](assets/videos/play_closeup_leftfront.mp4)
