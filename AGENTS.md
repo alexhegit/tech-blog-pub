@@ -9,10 +9,12 @@
 ## 1. What this repo is
 
 `tech-blog-pub` is the **public release version of `tech-blog`**. It is NOT a
-simplified or "popular-science" rewrite — it carries the **same content** as the
-source post (same story, technical depth, results, figures, GIFs, sections). The
-only thing that changes is **packaging / format**, optimized for publishing and
-distribution across platforms (GitHub, LinkedIn, WeChat, X, …).
+"popular-science" rewrite — **in principle it keeps the same content** as the
+source post (same story, technical depth, results, figures, GIFs, sections). What
+changes is **packaging / format**, optimized for publishing and distribution
+across platforms (GitHub, LinkedIn, WeChat, X, …). If a piece is too long for a
+channel, the content may be **trimmed — but only after explicit human approval**
+(see the Content Sync Rule in §2).
 
 - **Relationship to source**: faithful public mirror of a `tech-blog` post.
 - **Content parity**: depth, numbers, and claims must match the source exactly.
@@ -39,10 +41,18 @@ The source of truth is **`tech-blog`** (PRIVATE working repo).
 > - All "hands-on / reproduce" CTAs must point to **publicly accessible** targets
 >   only (e.g. the upstream open-source project repo and its PRs).
 
-> CONTENT SYNC RULE — when releasing/updating from `tech-blog`, the ONLY allowed
-> edits are: (a) **public-safety** (replace/strip private links, copy assets in,
-> remove any non-public references); (b) **format optimization** for distribution
-> (see §5). Do NOT cut technical depth, change results, or dumb down the writing.
+> CONTENT SYNC RULE — content stays consistent with `tech-blog` **in principle**.
+> When releasing/updating, the allowed edits are:
+> - (a) **public-safety** (replace/strip private links, copy assets in, remove any
+>   non-public references);
+> - (b) **format optimization** for distribution on LinkedIn / WeChat / X / GitHub
+>   (see §5) — this is encouraged and platform-specific;
+> - (c) **length trimming** ONLY when the piece is too long for the target channel
+>   — and ONLY after **explicit human approval**. The agent may *propose* concrete
+>   cuts (and explain what/why), but must not trim autonomously.
+>
+> Never change results/numbers, and never silently drop technical depth. Format
+> may change freely; meaning must not.
 
 ## 3. Layout convention
 
@@ -132,8 +142,12 @@ git push
 
 ## 8. Guardrails for agents
 
-- **Content parity** with `tech-blog`: do not simplify away depth or change results.
+- **Content consistency** with `tech-blog` in principle: do not change results or
+  silently drop technical depth.
+- **Format** may be optimized freely for the target platform (LinkedIn / WeChat / X).
+- **Length trimming** for over-long pieces is allowed ONLY after explicit human
+  approval — propose cuts, don't apply them autonomously.
 - Self-contained, public-safe assets only; never reference/hotlink the private repo.
 - Numbers/claims must match the source post exactly.
 - Every CTA must be publicly reachable — verify links resolve.
-- Keep format changes in service of the platform; never let formatting alter meaning.
+- Never let formatting (or approved trimming) alter the meaning.
