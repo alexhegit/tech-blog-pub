@@ -8,126 +8,92 @@
 
 ## 1. What this repo is
 
-`tech-blog-pub` is the **public release version of `tech-blog`**. It is NOT a
-"popular-science" rewrite — **in principle it keeps the same content** as the
-source post (same story, technical depth, results, figures, GIFs, sections). What
-changes is **packaging / format**, optimized for publishing and distribution
-across platforms (GitHub, LinkedIn, WeChat, X, …). If a piece is too long for a
-channel, the content may be **trimmed — but only after explicit human approval**
-(see the Content Sync Rule in §2).
+`tech-blog-pub` is the **public release version of `tech-blog`** — a **concise,
+~3-minute bilingual digest** of the source deep-dive, format-optimized for sharing
+and reposting on LinkedIn / WeChat / X.
 
-- **Relationship to source**: faithful public mirror of a `tech-blog` post.
-- **Content parity**: depth, numbers, and claims must match the source exactly.
-- **Visibility**: PUBLIC.
-- **Languages**: bilingual (中文 + English), same as the source.
-- **What "format-optimized" means**: keep the content; adapt *presentation* to
-  each platform's constraints, and ship ready-to-publish exports + social copy.
+- **Consistent in substance** with `tech-blog`: same story, environment, results,
+  and claims — never contradict or change the numbers.
+- **Intentionally trimmed**: it does NOT reproduce every section/command/figure of
+  the deep-dive. It keeps the essentials and points readers to the project to go
+  deeper and reproduce.
+- **Goal**: in ~3 minutes, tell readers *what was done* and *make them want to
+  reproduce it* via the referenced open-source project.
+- **Visibility**: PUBLIC. **Languages**: bilingual (中文 then English).
 
 ## 2. Companion repo & relationship
 
 The source of truth is **`tech-blog`** (PRIVATE working repo).
 
-- `tech-blog` (PRIVATE) = where the post is authored and iterated.
-- `tech-blog-pub` (here, PUBLIC) = the **released, format-optimized** version of
-  the same post.
+- `tech-blog` (PRIVATE) = full engineering deep-dive (all sections, commands,
+  curves, diagnostics, war stories).
+- `tech-blog-pub` (here, PUBLIC) = the **concise public digest** of that post.
 - A post shares the **same `<category>/<slug>`** in both repos
   (e.g. `PhysicalAI/openarm-rl-grasp/`).
 
 > CRITICAL — public reachability rules:
 > - `tech-blog` is PRIVATE. **Never link to it** as a reader CTA, and **never
 >   hotlink its raw asset URLs** (they 404 / don't render for the public).
-> - This repo must be **self-contained**: copy any needed images/clips INTO this
+> - This repo must be **self-contained**: copy any needed images/GIFs INTO this
 >   post's `assets/`.
-> - All "hands-on / reproduce" CTAs must point to **publicly accessible** targets
->   only (e.g. the upstream open-source project repo and its PRs).
+> - All "reproduce / hands-on" references must point to **publicly accessible**
+>   targets only (e.g. the upstream open-source project repo and its PRs).
 
-> CONTENT SYNC RULE — content stays consistent with `tech-blog` **in principle**.
-> When releasing/updating, the allowed edits are:
-> - (a) **public-safety** (replace/strip private links, copy assets in, remove any
->   non-public references);
-> - (b) **format optimization** for distribution on LinkedIn / WeChat / X / GitHub
->   (see §5) — this is encouraged and platform-specific;
-> - (c) **length trimming** ONLY when the piece is too long for the target channel
->   — and ONLY after **explicit human approval**. The agent may *propose* concrete
->   cuts (and explain what/why), but must not trim autonomously.
->
-> Never change results/numbers, and never silently drop technical depth. Format
-> may change freely; meaning must not.
+> CONTENT RULE — the digest stays consistent with `tech-blog` in substance.
+> Trimming for the ~3-min length is expected and pre-approved for this repo, BUT:
+> never change results/numbers, and never contradict the source. If unsure whether
+> a deeper cut is acceptable, propose it to a human first.
 
 ## 3. Layout convention
 
 ```
 <category>/<post-slug>/
-  README.md            # full public article (bilingual), content parity with tech-blog
+  README.md            # the concise bilingual digest (中文 then English)
   assets/
-    images/            # figures copied in (self-contained)
     gifs/              # inline-playable animations (auto-play via ![]()) — preferred for motion
-    videos/            # full-quality MP4 (HD download link; not inline on GitHub)
-  social/
-    linkedin.md        # ready-to-paste LinkedIn post (+ article notes)
-    x-thread.md        # ready-to-paste X/Twitter thread
-    wechat.md          # ready-to-paste WeChat copy (title + blurb + adapted body)
-  publish/             # (optional) platform-ready exports (e.g. wechat-body, linkedin-article)
+    images/            # only the 1–2 most compelling figures, if any
 ```
 
 - Reuse the SAME `<category>/<slug>` as the source post in `tech-blog`.
-- Assets are **copied in**, never hotlinked from the private repo.
+- Keep `assets/` **lean**: only the visuals actually embedded in the digest
+  (typically 1–2 GIFs). Do not carry over unused figures/videos/code.
+- No `social/` or `publish/` folders — the bilingual README *is* the deliverable;
+  readers repost it manually to each platform.
 
-## 4. How to release a post (agent workflow)
+## 4. Required structure of the digest (README.md)
 
-Given a source post in `tech-blog`:
+H1 title (zh) + one-line en subtitle (blockquote) + a language switch line with a
+`⏱️ ~3 min read` hint, then a `中文` section and an `English` section, each with:
 
-1. Mirror the post: copy the source `README.md` + `assets/` into the same
-   `<category>/<slug>/` here.
-2. **Public-safety pass**: replace any private links, ensure all assets are local
-   copies, confirm there are no `tech-blog` (private) hotlinks. CTAs → public only.
-3. **Format-optimization pass** (§5): keep content identical; improve scannability
-   and prepare platform exports.
-4. Write the `social/` files (§6) and any `publish/` exports.
-5. Update the root `README.md` index with the post + one-liner.
-6. Commit and push (§7); verify public assets return `200`.
+1. **概要 / Overview** — what we did + the 1–2 most interesting outcomes, in a few
+   sentences. Embed the single strongest GIF right after.
+2. **实践环境 / Environment** — hardware (e.g. AMD Instinct MI300X/MI210), platform
+   (e.g. ROCm + the one-line setup), and the framework (one-sentence identity).
+3. **实践过程概要 + 关键命令 / What we did + key commands** — a short bulleted
+   summary of the process, then only the **few key commands** (not every command).
+4. **实践结果与结论 / Results & takeaways** — a compact results table or bullets,
+   plus 2–3 takeaways.
+5. **项目引用 / References** — links to the PUBLIC project + PR, framed as
+   "reproduce it yourself".
 
-## 5. Format optimization (per platform)
+Keep each language to roughly a 3-minute read. Lead with the story/surprise.
 
-The **GitHub README here is the canonical full article** (Markdown, inline GIFs,
-tables, code blocks all render). Keep its content identical to the source; only
-improve scannability: a TL;DR up top, bold takeaways, clear section anchors.
+## 5. Format optimization (for reposting)
 
-Other platforms do NOT support Markdown / code highlighting / tables / external
-images the same way, so prepare adapted exports rather than pasting raw Markdown:
+The GitHub README renders Markdown, inline GIFs, tables, and code blocks. When the
+author manually reposts elsewhere, keep in mind (do NOT add per-platform files):
 
-- **WeChat 公众号**: no Markdown or code highlighting; **blocks external images**
-  (防盗链); GIF has size limits. → Provide an adapted Chinese body (e.g. via an
-  mdnice-style converter), re-upload all images/GIFs to WeChat, turn tables into
-  a simple list or an image, keep code snippets minimal (or as an image).
-- **LinkedIn**: Article = rich text (no code highlight / no real tables); Post =
-  plain text (~3000 chars), links are deprioritized in-body. → Code/tables as
-  images or bullet lists; put the primary CTA link in the **first comment**, not
-  the body; lead with a hook + one strong visual (GIF/image).
-- **X/Twitter**: numbered thread, ~280 chars/tweet, one media per tweet. → Map
-  beats to tweets, attach the GIF/figure per tweet, CTA in the last tweet.
+- **WeChat**: no Markdown/code highlighting; **blocks external images** (re-upload
+  in the editor); tables may need to become a list/image; GIF has size limits.
+- **LinkedIn**: rich-text article / plain-text post; code & tables don't render —
+  use an image or bullets; put the primary link in the first comment.
+- **X**: split into a short thread; one media per tweet.
 
-Language targeting: prefer **one language per platform export** (English for
-LinkedIn/X, Chinese for WeChat); the repo README stays bilingual.
+Prefer leading with the strongest GIF/figure; numbers as a compact table.
 
-Visuals carry distribution: lead with the strongest GIF/figure; consider turning
-the key results **table** into a clean image so it survives platforms that don't
-render Markdown tables.
-
-## 6. Social copy convention (`social/`)
-
-- `linkedin.md`: a single post (~150–250 words) + optional Article outline; one
-  strong visual; a few hashtags; public CTA (link in first comment).
-- `x-thread.md`: a numbered thread (6–9 tweets), per-tweet media notes, CTA in the
-  last tweet, hashtags.
-- `wechat.md`: title candidates + a <140-char blurb + an adapted Chinese body +
-  public CTA links.
-- All copy must funnel to PUBLIC targets only. No private links.
-
-## 7. Publishing (git/gh)
+## 6. Publishing (git/gh)
 
 ```bash
-# from the repo root
 git add -A
 git commit -m "blog(<category>): <what changed>"
 git push
@@ -140,14 +106,10 @@ git push
   `curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/<owner>/tech-blog-pub/main/<path>`
   (expect `200`).
 
-## 8. Guardrails for agents
+## 7. Guardrails for agents
 
-- **Content consistency** with `tech-blog` in principle: do not change results or
-  silently drop technical depth.
-- **Format** may be optimized freely for the target platform (LinkedIn / WeChat / X).
-- **Length trimming** for over-long pieces is allowed ONLY after explicit human
-  approval — propose cuts, don't apply them autonomously.
+- Keep it a **~3-min digest**; deep detail belongs in `tech-blog`.
+- Consistent with the source in substance; **never change results/numbers**.
 - Self-contained, public-safe assets only; never reference/hotlink the private repo.
-- Numbers/claims must match the source post exactly.
-- Every CTA must be publicly reachable — verify links resolve.
-- Never let formatting (or approved trimming) alter the meaning.
+- Every reference/CTA must be publicly reachable — verify links resolve.
+- Lean assets: only what the digest embeds.

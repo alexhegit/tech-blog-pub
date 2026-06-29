@@ -1,11 +1,11 @@
 # tech-blog-pub
 
-技术实践笔记的**公开发布版**：内容与原文一致，格式针对 LinkedIn / X / 微信等平台优化，
-方便转发分享。想动手实践的读者，文末都会引流到公开的开源仓库。
+技术实践笔记的**公开发布版**：每篇约 3 分钟阅读的中英文精简版，面向 LinkedIn / X / 微信
+等平台转发。读者读完能快速知道"做了什么"，并通过文末项目引用动手复现。
 
-The **public release** of my engineering practice notes: same content as the
-source, format-optimized for sharing on LinkedIn / X / WeChat. Hands-on readers
-are funneled to the public open-source repos at the end of each piece.
+The **public release** of my engineering practice notes: a concise ~3-min bilingual
+digest per post, made for reposting on LinkedIn / X / WeChat. Readers get the gist
+fast and can reproduce it via the project links at the end.
 
 ## PhysicalAI
 
