@@ -1,30 +1,34 @@
-# AGENTS.md — tech-blog-pub (public popular-science)
+# AGENTS.md — tech-blog-pub (public release of tech-blog)
 
 > This file is written for AI coding/writing agents (e.g. OpenClaw, Hermes,
-> OpenCode, Cursor, Copilot). It explains what this repo is, how to author a
-> short public post + social copy, and how it relates to the private deep-dive
-> repo `tech-blog`. Any agent should be able to read this file and create or
-> publish a post correctly.
+> OpenCode, Cursor, Copilot). It explains what this repo is, how to produce a
+> **public, platform-ready release** of a `tech-blog` post, and how it relates to
+> the private source repo `tech-blog`. Any agent should be able to read this file
+> and release/update a post correctly.
 
 ## 1. What this repo is
 
-`tech-blog-pub` is a **public**, popular-science companion blog. Posts are short,
-story-driven, low-jargon retellings of a project, made for sharing on social media
-(LinkedIn / X / WeChat) and for funneling curious readers toward hands-on,
-open-source practice.
+`tech-blog-pub` is the **public release version of `tech-blog`**. It is NOT a
+simplified or "popular-science" rewrite — it carries the **same content** as the
+source post (same story, technical depth, results, figures, GIFs, sections). The
+only thing that changes is **packaging / format**, optimized for publishing and
+distribution across platforms (GitHub, LinkedIn, WeChat, X, …).
 
-- **Audience**: broad / general technical readers (not specialists).
+- **Relationship to source**: faithful public mirror of a `tech-blog` post.
+- **Content parity**: depth, numbers, and claims must match the source exactly.
 - **Visibility**: PUBLIC.
-- **Read time target**: 3–5 minutes (~700–1000 words per language).
-- **Tone**: narrative, accessible, light on math/jargon, visuals carry weight.
+- **Languages**: bilingual (中文 + English), same as the source.
+- **What "format-optimized" means**: keep the content; adapt *presentation* to
+  each platform's constraints, and ship ready-to-publish exports + social copy.
 
 ## 2. Companion repo & relationship
 
-The private deep-dive source of truth is **`tech-blog`** (not public).
+The source of truth is **`tech-blog`** (PRIVATE working repo).
 
-- `tech-blog` = full engineering depth (configs, curves, diagnostics, war stories).
-- `tech-blog-pub` (here) = the **short, public** derivative for distribution.
-- A post usually shares the **same `<category>/<slug>`** in both repos
+- `tech-blog` (PRIVATE) = where the post is authored and iterated.
+- `tech-blog-pub` (here, PUBLIC) = the **released, format-optimized** version of
+  the same post.
+- A post shares the **same `<category>/<slug>`** in both repos
   (e.g. `PhysicalAI/openarm-rl-grasp/`).
 
 > CRITICAL — public reachability rules:
@@ -35,55 +39,82 @@ The private deep-dive source of truth is **`tech-blog`** (not public).
 > - All "hands-on / reproduce" CTAs must point to **publicly accessible** targets
 >   only (e.g. the upstream open-source project repo and its PRs).
 
+> CONTENT SYNC RULE — when releasing/updating from `tech-blog`, the ONLY allowed
+> edits are: (a) **public-safety** (replace/strip private links, copy assets in,
+> remove any non-public references); (b) **format optimization** for distribution
+> (see §5). Do NOT cut technical depth, change results, or dumb down the writing.
+
 ## 3. Layout convention
 
 ```
 <category>/<post-slug>/
-  README.md            # the short post (bilingual: 中文 then English)
+  README.md            # full public article (bilingual), content parity with tech-blog
   assets/
-    images/            # 1–3 key visuals only (copied, self-contained)
+    images/            # figures copied in (self-contained)
     gifs/              # inline-playable animations (auto-play via ![]()) — preferred for motion
-    videos/            # optional full-quality MP4 (HD download link; not inline on GitHub)
+    videos/            # full-quality MP4 (HD download link; not inline on GitHub)
   social/
-    linkedin.md        # ready-to-paste LinkedIn post
+    linkedin.md        # ready-to-paste LinkedIn post (+ article notes)
     x-thread.md        # ready-to-paste X/Twitter thread
-    wechat.md          # ready-to-paste WeChat copy (title + blurb + body)
+    wechat.md          # ready-to-paste WeChat copy (title + blurb + adapted body)
+  publish/             # (optional) platform-ready exports (e.g. wechat-body, linkedin-article)
 ```
 
-- Reuse the SAME `<category>/<slug>` as the deep-dive post in `tech-blog`.
-- Keep `assets/` lean — pick the 1–3 most compelling visuals, not everything.
+- Reuse the SAME `<category>/<slug>` as the source post in `tech-blog`.
+- Assets are **copied in**, never hotlinked from the private repo.
 
-## 4. How to derive a public post (agent workflow)
+## 4. How to release a post (agent workflow)
 
-Given a deep-dive post (in `tech-blog`) or raw project notes:
+Given a source post in `tech-blog`:
 
-1. Create `(<category>)/<slug>/assets/{images,gifs,videos}/` and `social/`.
-2. Copy the 1–3 strongest visuals into `assets/` (do NOT hotlink the private repo).
-   For motion, embed a lean **GIF** inline (auto-plays everywhere, incl. WeChat);
-   keep the full MP4 as an HD download link below it.
-3. Write `README.md` (3–5 min read):
-   - H1 hook title (zh) + en subtitle; language switch + read-time line.
-   - One lead image near the top.
-   - 3–4 short beats max. Lead with the story/surprise, not the architecture.
-   - Replace jargon with plain analogies; keep at most one or two named concepts.
-   - End with a **"Want to try it yourself?"** CTA linking ONLY public repos
-     (upstream OSS project + PR).
-   - Bilingual: full 中文 section, then full English section.
-4. Write the three `social/` files (see §5).
-5. Update the root `README.md` index with the new post + one-liner.
-6. Commit and push (see §6).
+1. Mirror the post: copy the source `README.md` + `assets/` into the same
+   `<category>/<slug>/` here.
+2. **Public-safety pass**: replace any private links, ensure all assets are local
+   copies, confirm there are no `tech-blog` (private) hotlinks. CTAs → public only.
+3. **Format-optimization pass** (§5): keep content identical; improve scannability
+   and prepare platform exports.
+4. Write the `social/` files (§6) and any `publish/` exports.
+5. Update the root `README.md` index with the post + one-liner.
+6. Commit and push (§7); verify public assets return `200`.
 
-## 5. Social copy convention (`social/`)
+## 5. Format optimization (per platform)
 
-- `linkedin.md`: a single post (~120–200 words), 1 image suggestion, a few
-  hashtags, public CTA links. Optionally include a zh variant below.
-- `x-thread.md`: a numbered thread (5–7 tweets), media notes per tweet, CTA in the
+The **GitHub README here is the canonical full article** (Markdown, inline GIFs,
+tables, code blocks all render). Keep its content identical to the source; only
+improve scannability: a TL;DR up top, bold takeaways, clear section anchors.
+
+Other platforms do NOT support Markdown / code highlighting / tables / external
+images the same way, so prepare adapted exports rather than pasting raw Markdown:
+
+- **WeChat 公众号**: no Markdown or code highlighting; **blocks external images**
+  (防盗链); GIF has size limits. → Provide an adapted Chinese body (e.g. via an
+  mdnice-style converter), re-upload all images/GIFs to WeChat, turn tables into
+  a simple list or an image, keep code snippets minimal (or as an image).
+- **LinkedIn**: Article = rich text (no code highlight / no real tables); Post =
+  plain text (~3000 chars), links are deprioritized in-body. → Code/tables as
+  images or bullet lists; put the primary CTA link in the **first comment**, not
+  the body; lead with a hook + one strong visual (GIF/image).
+- **X/Twitter**: numbered thread, ~280 chars/tweet, one media per tweet. → Map
+  beats to tweets, attach the GIF/figure per tweet, CTA in the last tweet.
+
+Language targeting: prefer **one language per platform export** (English for
+LinkedIn/X, Chinese for WeChat); the repo README stays bilingual.
+
+Visuals carry distribution: lead with the strongest GIF/figure; consider turning
+the key results **table** into a clean image so it survives platforms that don't
+render Markdown tables.
+
+## 6. Social copy convention (`social/`)
+
+- `linkedin.md`: a single post (~150–250 words) + optional Article outline; one
+  strong visual; a few hashtags; public CTA (link in first comment).
+- `x-thread.md`: a numbered thread (6–9 tweets), per-tweet media notes, CTA in the
   last tweet, hashtags.
-- `wechat.md`: title candidates + a <140-char blurb + a ~600-char Chinese body +
+- `wechat.md`: title candidates + a <140-char blurb + an adapted Chinese body +
   public CTA links.
 - All copy must funnel to PUBLIC targets only. No private links.
 
-## 6. Publishing (git/gh)
+## 7. Publishing (git/gh)
 
 ```bash
 # from the repo root
@@ -99,9 +130,10 @@ git push
   `curl -s -o /dev/null -w "%{http_code}" https://raw.githubusercontent.com/<owner>/tech-blog-pub/main/<path>`
   (expect `200`).
 
-## 7. Guardrails for agents
+## 8. Guardrails for agents
 
-- Keep it short (3–5 min). If it grows deep, that content belongs in `tech-blog`.
-- Self-contained assets only; never reference or hotlink the private repo.
+- **Content parity** with `tech-blog`: do not simplify away depth or change results.
+- Self-contained, public-safe assets only; never reference/hotlink the private repo.
+- Numbers/claims must match the source post exactly.
 - Every CTA must be publicly reachable — verify links resolve.
-- Don't invent results; numbers/claims should match the deep-dive source.
+- Keep format changes in service of the platform; never let formatting alter meaning.
