@@ -4,7 +4,7 @@
 
 **语言 / Language:** [中文](#中文) · [English](#english) ·  📄 技术详解版 / Deep-dive
 
-> ⚡ 精简版待补 / Concise digest: TBD
+> ⚡ 只想 3 分钟快速了解？ → [**精简版 / Concise digest**](README.md)
 
 > TL;DR：我们在 [UniLab](https://github.com/unilabsim/UniLab) 框架上，用 PPO 给
 > OpenArm 单臂训练了一个"把方块抬到空中目标点"的抓取策略。过程中遇到三个有意思的
