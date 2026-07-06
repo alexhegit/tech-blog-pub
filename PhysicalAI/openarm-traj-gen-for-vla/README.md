@@ -4,6 +4,8 @@
 
 **语言 / Language:** [中文](#中文) · [English](#english) ·  ⏱️ ~3 min read
 
+> 📖 想看完整工程细节（设计决策、算法/reward、诊断、复现命令）？ → [**技术详解版 / Deep-dive**](README-details.md)
+
 ---
 
 ## 中文
