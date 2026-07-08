@@ -76,6 +76,11 @@ git push
 本仓库是**唯一内容源**，官网内容由脚本从这里**单向生成**（pub → Hugo），不要在
 Hugo 仓库手写文章正文，否则会漂移。
 
+> 职责划分：**本节(pub AGENTS.md)是发布流程与规则的权威来源**；**站点构建内部**
+> （生成器实现、Hugo/PaperMod 版本锁、mermaid、CI/部署、i18n/默认语言）见官网仓库
+> `README.md`：<https://github.com/rocPAI-Forge/rocPAI-Forge.github.io/blob/main/README.md>。
+> llm-wiki 只留指针页,不记步骤。
+
 **发布到官网 = 给该文件夹加一个 `meta.toml` sidecar**（只影响官网，不影响 GitHub 阅读）：
 
 ```toml
