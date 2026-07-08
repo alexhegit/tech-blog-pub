@@ -88,10 +88,14 @@ title_en = "English title"
 publish = true                      # false 或缺该文件 = 不上官网
 ```
 
-- 官网**只发精简版** `README.md`；`README-details.md` 由官网文末链接指回本仓库，不重复上站。
+- 官网**只发精简版** `README.md`；`README-details.md` 不重复上站，由官网文章内的
+  链接指回本仓库。
+- **发布规则(必守)**：每篇精简版站点文章必须在**正文显著位置**给出详解版入口——
+  当前生成器在 **hero 之后(开头)** 放一条显著引导 **+ 文末兜底**，两处都链到本仓库对应的
+  `README-details.md`。目的：让愿意多花时间的读者尽早切换到详解版。**不要移除**这条入口。
 - 生成器（`rocPAI-Forge.github.io/scripts/sync_from_pub.py`）会：拆双语 → 套 front
-  matter → `assets/gifs/*.gif` 转循环 `<video>`(mp4+jpg 海报) → 媒体落到
-  `static/media/<slug>/` → 文末补详解版链接。
+  matter → 正文标题上提一级 → `assets/gifs/*.gif` 转循环 `<video>`(mp4+jpg 海报) →
+  媒体落到 `static/media/<slug>/` → **开头 + 文末各插一个详解版入口**。
 - 触发：`main` 分支上 `README.md` / `meta.toml` / `assets/**` 变化 →
   `.github/workflows/notify-site.yml` 通过 `repository_dispatch` 通知官网仓库重建。
 
