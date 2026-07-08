@@ -70,3 +70,39 @@ git push
 ```
 
 - 本仓库 **PUBLIC**：只放公开安全内容；媒体自包含，不热链任何私有来源。
+
+## 7. 同步到 Hugo 官网（rocPAI-Forge.github.io）
+
+本仓库是**唯一内容源**，官网内容由脚本从这里**单向生成**（pub → Hugo），不要在
+Hugo 仓库手写文章正文，否则会漂移。
+
+**发布到官网 = 给该文件夹加一个 `meta.toml` sidecar**（只影响官网，不影响 GitHub 阅读）：
+
+```toml
+slug = "openarm-traj-gen"          # 官网 URL/文件名 slug(可与文件夹名不同)
+date = 2026-06-30
+author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
+tags = ["AMD ROCm", "PhysicalAI", "VLA", "OpenArm"]
+title_zh = "中文标题"
+title_en = "English title"
+publish = true                      # false 或缺该文件 = 不上官网
+```
+
+- 官网**只发精简版** `README.md`；`README-details.md` 由官网文末链接指回本仓库，不重复上站。
+- 生成器（`rocPAI-Forge.github.io/scripts/sync_from_pub.py`）会：拆双语 → 套 front
+  matter → `assets/gifs/*.gif` 转循环 `<video>`(mp4+jpg 海报) → 媒体落到
+  `static/media/<slug>/` → 文末补详解版链接。
+- 触发：`main` 分支上 `README.md` / `meta.toml` / `assets/**` 变化 →
+  `.github/workflows/notify-site.yml` 通过 `repository_dispatch` 通知官网仓库重建。
+
+### 一次性配置:SITE_DISPATCH_TOKEN
+
+跨账户触发（本仓库 `alexhegit` → 官网 `rocPAI-Forge`）需要一个 PAT：
+
+1. 建 PAT——classic 勾 `repo`，或 fine-grained 授权 `rocPAI-Forge/rocPAI-Forge.github.io`
+   的 **Contents: Read and write**。
+2. 本仓库 **Settings → Secrets and variables → Actions → New repository secret**，
+   名字 `SITE_DISPATCH_TOKEN`，值填 PAT。
+
+未配置该 secret 时 `notify-site.yml` 会显式失败并提示；官网仓库仍可用
+`workflow_dispatch` 手动重建。

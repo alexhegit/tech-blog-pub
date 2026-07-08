@@ -1,0 +1,37 @@
+name: Notify site to rebuild
+
+# 内容(README / meta.toml / assets)变化后,通知 Hugo 站点仓库重新生成并部署。
+# 需要仓库 secret: SITE_DISPATCH_TOKEN —— 一个对
+# rocPAI-Forge/rocPAI-Forge.github.io 有写权限的 PAT(classic: repo 权限;
+# 或 fine-grained: 该仓库 Contents=Read/Write)。设置见仓库根 AGENTS.md。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/README.md"
+      - "**/meta.toml"
+      - "**/assets/**"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger rocPAI-Forge.github.io rebuild
+        env:
+          TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::warning::SITE_DISPATCH_TOKEN 未配置,跳过站点自动重建(见 AGENTS.md);可在官网仓库手动 workflow_dispatch。"
+            exit 0
+          fi
+          curl -sS -f -X POST \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/rocPAI-Forge/rocPAI-Forge.github.io/dispatches \
+            -d '{"event_type":"pub-updated"}'
+          echo "已通知 rocPAI-Forge.github.io 重建 (event_type=pub-updated)"

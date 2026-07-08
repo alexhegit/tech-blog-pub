@@ -1,0 +1,11 @@
+# Hugo 站点发布元数据(sidecar) — 供 rocPAI-Forge.github.io 的 sync_from_pub.py 读取
+# 只影响网站发布,不影响本仓库在 GitHub 上的阅读。
+slug = "openarm-traj-gen"
+date = 2026-06-30
+author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
+tags = ["AMD ROCm", "PhysicalAI", "VLA", "OpenArm"]
+title_zh = "给 VLA 喂饭：在 AMD ROCm 上用 OpenArm 生成抓取专家轨迹"
+title_en = "Feeding the VLA: Generating Expert Grasp Trajectories for OpenArm on AMD ROCm"
+
+# 是否发布到网站(false 则生成器跳过)
+publish = true
