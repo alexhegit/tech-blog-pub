@@ -6,7 +6,7 @@
 
 > 📖 想看完整工程细节（reward 设计、训练曲线诊断、复现命令）？ → [**技术详解版 / Deep-dive**](README-details.md)
 
-![总览回放](assets/gifs/play_overview.gif)
+![总览回放 / Overview replay](assets/gifs/play_overview.gif)
 
 ---
 

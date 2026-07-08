@@ -1,0 +1,11 @@
+# Hugo 站点发布元数据(sidecar) — 供 rocPAI-Forge.github.io 的 sync_from_pub.py 读取
+# 只影响网站发布,不影响本仓库在 GitHub 上的阅读。
+slug = "openarm-rl-grasp"
+date = 2026-07-06
+author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
+tags = ["AMD ROCm", "PhysicalAI", "RL", "OpenArm", "UniLab"]
+title_zh = "当机械臂自己发明了一种抓法：OpenArm 抓取强化学习实践"
+title_en = "When a Robot Arm Invents Its Own Grip: An RL Practice with OpenArm"
+
+# 是否发布到网站(false 则生成器跳过)
+publish = true
