@@ -87,7 +87,7 @@ Hugo 仓库手写文章正文，否则会漂移。
 slug = "openarm-traj-gen"          # 官网 URL/文件名 slug(可与文件夹名不同)
 date = 2026-06-30
 author = "rocPAI-Lab: Alex He, David Li, Andy Luo"
-tags = ["AMD ROCm", "PhysicalAI", "VLA", "OpenArm"]
+tags = ["ROCm", "VLA", "OpenArm"]
 title_zh = "中文标题"
 title_en = "English title"
 publish = true                      # false 或缺该文件 = 不上官网
