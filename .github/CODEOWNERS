@@ -1,7 +1,6 @@
-# CODEOWNERS — tech-blog-pub
+# CODEOWNERS — tech-blog-pub（可选）
 #
-# 合并到 main 前，GitHub 会按 branch protection 向此处列出的账号/团队请求 review。
-# Org 管理员创建团队后，可将下行改为：* @rocPAI-Forge/blog-maintainers
-# （见 AGENTS.md §10）
+# PR 时自动 @ 下列维护者作 reviewer；未强制 Code Owners review 时不阻塞合并。
+# 见 AGENTS.md §10.5
 
 * @AlexHe99 @alexhegit @ZJLi2013
