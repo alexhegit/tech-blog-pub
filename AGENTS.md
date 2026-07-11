@@ -130,6 +130,7 @@ publish = true                      # false 或缺该文件 = 不上官网
 3. 为详解版单独建 `<slug>-details/` 文件夹。
 4. 引用本帖 `assets/` 目录外的媒体。
 5. 试图移除生成器插入的详解版入口链接（生成器在 hero 后 + 文末各插一条）。
+6. 直接 `git push origin main`（`main` 仅允许 PR merge）。
 
 ## 6. 新机器准备（首次发布前）
 
@@ -182,13 +183,13 @@ hugo server -D    # http://localhost:1313/
 5. 两版顶部互加跳转链接（见 §3）。
 6. 添加 `meta.toml`，`publish = true`（要上官网时）。
 7. 更新根 `README.md` 索引表：新增该文章 + 一句话摘要。
-8. **发布**（见 §8）。
+8. **发布**：分支 commit → PR → merge `main`（见 §8）。
 
 ### B. 修改已有文章
 
 1. 编辑 `PhysicalAI/<slug>/README.md`（及 `README-details.md` 如需要）。
 2. 若 tags / 标题 / 日期变化，更新 `meta.toml`。
-3. **发布**（见 §8）。
+3. **发布**：分支 commit → PR → merge `main`（见 §8）。
 
 ### C. 草稿（不上官网）
 
@@ -196,19 +197,28 @@ hugo server -D    # http://localhost:1313/
 
 ## 8. 发布
 
-发布分两步：**push 本仓库** → **同步并 push 官网仓库**（或由 CI 自动触发第二步）。
+发布分两步：**PR 合并到 `main`** → **同步并 push 官网仓库**（或由 CI 自动触发第二步）。
 
-### 8.1 Push 内容源（本仓库）
+`main` 已启用 **branch protection**：禁止直接 push，所有内容变更必须 **分支 → PR → merge**。
+
+### 8.1 提交内容源（本仓库，经 PR）
 
 ```bash
 cd tech-blog-pub
+git checkout -b blog/<slug>-<short-desc>    # 例: blog/openarm-rl-grasp-unilab
+
 git add -A
 git commit -m "blog(<slug>): <what changed>"
-git push
+
+git push -u origin HEAD
+gh pr create --base main --title "blog(<slug>): <what changed>" --body "…"
+# 或于 GitHub 网页创建 PR；维护者 review 后 merge
 ```
 
 - 本仓库 **PUBLIC**：只放公开安全内容；媒体自包含，不热链任何私有来源。
-- Commit 格式：`blog(<slug>): …`，例：`blog(openarm-rl-grasp): add UniLab intro`
+- Commit / PR 标题格式：`blog(<slug>): …`，例：`blog(openarm-rl-grasp): add UniLab intro`
+- **Merge 到 `main` 后**才触发官网自动重建（§8.2 方式一）；PR 打开期间不会发站。
+- Agent：**不要** `git push origin main`；在用户确认后 push 分支并协助开 PR。
 
 ### 8.2 同步到 Hugo 官网
 
@@ -258,6 +268,11 @@ git push
 # 列出已标记上站的文章
 grep -l 'publish = true' PhysicalAI/*/meta.toml
 
+# 发布本仓库（main 受保护，走 PR）
+git checkout -b blog/<slug>-<desc>
+git add -A && git commit -m "blog(<slug>): …"
+git push -u origin HEAD && gh pr create --base main --fill
+
 # 从 Hugo 仓库根目录生成内容
 python3 scripts/sync_from_pub.py --pub ../tech-blog-pub --out .
 
@@ -272,62 +287,55 @@ python3 scripts/sync_from_pub.py --pub ../tech-blog-pub --out .
 | 官网（仅 sync） | `content(<slug>): sync from tech-blog-pub` | `content(openarm-rl-grasp): sync tags` |
 | 官网（手写页） | `content(overview): …` | overview/roadmap 等非博文页面 |
 
-仅在用户要求时提交 commit。发现站点正文有误时，改本仓库源文件后 re-sync，不要手改生成结果。
+仅在用户要求时提交 commit 并开 PR。发现站点正文有误时，改本仓库源文件后 re-sync，不要手改生成结果。
 
 ## 10. 仓库权限与贡献
 
-本仓库 **public 可读**；**写权限与合并权**只给受信维护者。公众可 fork，通过 PR 贡献。
+本仓库 **public 可读**。内容变更统一走 **PR → merge `main`**（branch protection 已启用）。
 
-### 10.1 权限模型
+### 10.1 权限与流程
 
-| 身份 | 读 | 直接 push `main` | 合并 PR |
-|------|----|------------------|---------|
-| 公众 | ✅ | ❌ | ❌ |
-| `rocPAI-Forge` org 成员（默认） | ✅ | ❌（除非被赋仓库写权限） | ❌ |
-| **`blog-maintainers` 团队**（推荐） | ✅ | 建议仍走 PR | ✅（经 review 后） |
-| Outside collaborator（逐人添加） | ✅ | 视授予角色 | 视授予角色 |
+| 身份 | 读 | 直接 push `main` | 开 PR / push 分支 | 合并 PR |
+|------|----|------------------|-------------------|---------|
+| 公众 | ✅ | ❌ | fork 后 ✅ | ❌ |
+| 无写权限的 org 成员 | ✅ | ❌ | ❌ | ❌ |
+| 仓库 Write 维护者 | ✅ | ❌ | ✅ | ✅（经 review 后） |
 
 **原则：**
 
-- 不要把 org 的 **Base permissions** 设为全员 Write。
-- 本仓库 **Settings → Collaborators and teams**：只给维护团队 **Write** 或 **Maintain**。
-- 外部个人不要给 Write；一律 **fork → PR**。
-- Agent 代写内容时，仍使用**维护者**的 git 凭证；权限落在人/团队，不向公众开放。
+- 所有博文改动：**分支上 commit → 开 PR → merge**，不直推 `main`。
+- 外部贡献：**fork → PR**；不要给外部个人 Write。
+- Agent 代写时使用维护者凭证 push **分支**，由维护者 merge PR。
 
-### 10.2 CODEOWNERS
-
-路径所有者见 [`.github/CODEOWNERS`](.github/CODEOWNERS)。当前指向 org 内维护者账号；org 管理员宜创建团队
-**`blog-maintainers`**，将维护者加入后把 CODEOWNERS 改为：
+### 10.2 维护者日常流程
 
 ```
-* @rocPAI-Forge/blog-maintainers
+git checkout -b blog/<slug>-<desc>
+# 写稿、commit
+git push -u origin HEAD
+gh pr create --base main …
+# review（若规则要求 approval）→ Merge pull request
+# → notify-site.yml 触发官网重建（§8.2）
 ```
 
-### 10.3 Org 管理员：建议的 branch protection（`main`）
+### 10.3 与官网发布的关系
 
-在 **Settings → Branches → Branch protection rules**（或 org Rulesets）为 `main` 启用：
+- **Merge 到 `main`** 后，[`.github/workflows/notify-site.yml`](.github/workflows/notify-site.yml)
+  在 `README.md` / `meta.toml` / `assets/**` 有变化时，通过 `repository_dispatch` 通知
+  Hugo 站点重建（需 `SITE_DISPATCH_TOKEN`，见 §8.3）。
+- 能 merge `main` 的维护者 ≈ 能间接触发官网更新；merge 前确认内容可公开。
+- `SITE_DISPATCH_TOKEN` 建议用 fine-grained PAT 或 bot 账号，只授权
+  `rocPAI-Forge/rocPAI-Forge.github.io` 的 Contents RW。
 
-1. **Require a pull request before merging**（建议 1 个 approval）
-2. **Require review from Code Owners**
-3. **Restrict who can push to matching branches** → 仅 `blog-maintainers`（或等效维护团队）
-4. 可选：**Do not allow bypassing the above settings**
-
-效果：即使有 Write，也优先 **PR + CODEOWNERS review** 再合入，降低误推与未审内容上线风险。
-
-### 10.4 与官网发布的关系
-
-- 合并到 `main` 会触发 [`.github/workflows/notify-site.yml`](.github/workflows/notify-site.yml)
-  （已配置 `SITE_DISPATCH_TOKEN` 时自动通知 Hugo 站点重建）。
-- **能合并 `main` 的维护者 ≈ 能间接触发官网更新**；因此 merge 权应与写稿权同样收紧。
-- `SITE_DISPATCH_TOKEN` 使用 **fine-grained PAT** 或 bot 账号，只授权
-  `rocPAI-Forge/rocPAI-Forge.github.io` 的 Contents RW；勿绑即将离职的个人账号。
-
-### 10.5 外部贡献流程
+### 10.4 外部贡献
 
 1. Fork `rocPAI-Forge/tech-blog-pub`
-2. 在 fork 上按本文件 §2–§7 写稿
-3. 向 `main` 提 PR；由 CODEOWNERS review
-4. 合并后由维护者确认官网 sync / CI 已完成（§8）
+2. 在 fork 上按 §2–§7 写稿
+3. 向 `main` 提 PR；维护者 review 后 merge
+4. Merge 后确认官网 sync / CI 已完成（§8）
 
-维护者不要要求外部贡献者申请仓库 Write 权限。
+### 10.5 CODEOWNERS（可选）
+
+[`.github/CODEOWNERS`](.github/CODEOWNERS) 列出默认 reviewer，便于 PR 自动 @ 维护者。
+未在 branch protection 中强制「Require review from Code Owners」时，仅作提示，不阻塞合并。
 
