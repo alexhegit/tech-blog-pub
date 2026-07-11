@@ -7,7 +7,8 @@
 The public home (single source of truth) for my engineering practice notes. Each topic
 keeps two coexisting versions: a **concise** `README.md` (~3-min bilingual digest for
 LinkedIn / X / WeChat) and a **deep-dive** `README-details.md` (full engineering detail
-and reproduction). See `AGENTS.md` for the authoring convention.
+and reproduction). **Authoring and publishing:** see [`AGENTS.md`](AGENTS.md) (single
+source for agents — no other docs required).
 
 ## PhysicalAI
 
