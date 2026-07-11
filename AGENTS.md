@@ -2,6 +2,9 @@
 
 > 面向 AI 编码/写作代理（Cursor、Copilot、OpenCode 等）。说明本仓库是什么、
 > 目录约定，以及如何新增/维护一篇文章。任何代理读完本文件即可正确创建或更新文章。
+>
+> **Cursor 一键工作流**（新机器 bootstrap、写稿、sync、发布）：
+> `.cursor/skills/rocpai-forge-blog/SKILL.md`
 
 ## 1. 本仓库是什么
 
