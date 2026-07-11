@@ -16,7 +16,7 @@ Symlink for Cursor: `ln -sf <path-to-this-repo>/.cursor/skills/rocpai-forge-blog
 
 ```
 tech-blog-pub (SOURCE)          rocPAI-Forge.github.io (SITE)
-alexhegit/tech-blog-pub    →    rocPAI-Forge/rocPAI-Forge.github.io
+rocPAI-Forge/tech-blog-pub →    rocPAI-Forge/rocPAI-Forge.github.io
                                 
 Write here. Never skip.         Generated + hand-written pages.
                                 Do NOT hand-edit blog post bodies.
@@ -24,7 +24,7 @@ Write here. Never skip.         Generated + hand-written pages.
 
 | Repo | Owner | Purpose |
 |------|-------|---------|
-| **tech-blog-pub** | `alexhegit` | **Single source of truth** for blog content. GitHub-readable bilingual posts + assets. |
+| **tech-blog-pub** | `rocPAI-Forge` | **Single source of truth** for blog content. GitHub-readable bilingual posts + assets. |
 | **rocPAI-Forge.github.io** | `rocPAI-Forge` | Hugo + PaperMod org site at https://rocpai-forge.github.io/. Blog posts are **generated** from pub. |
 
 **Data flow (one direction only):**
@@ -56,7 +56,7 @@ https://rocpai-forge.github.io/
 WORK_DIR="${WORK_DIR:-$HOME/rocpai-forge}"
 mkdir -p "$WORK_DIR" && cd "$WORK_DIR"
 
-git clone https://github.com/alexhegit/tech-blog-pub.git
+git clone https://github.com/rocPAI-Forge/tech-blog-pub.git
 git clone https://github.com/rocPAI-Forge/rocPAI-Forge.github.io.git
 ```
 

@@ -109,7 +109,7 @@ publish = true                      # false 或缺该文件 = 不上官网
 
 ### 一次性配置:SITE_DISPATCH_TOKEN
 
-跨账户触发（本仓库 `alexhegit` → 官网 `rocPAI-Forge`）需要一个 PAT：
+跨仓库触发（`tech-blog-pub` → `rocPAI-Forge.github.io`，同 org 下仍需 PAT 或 org secret）：
 
 1. 建 PAT——classic 勾 `repo`，或 fine-grained 授权 `rocPAI-Forge/rocPAI-Forge.github.io`
    的 **Contents: Read and write**。

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 WORK_DIR="${1:-${ROCPAI_WORK_DIR:-$HOME/rocpai-forge}}"
-PUB_REPO="${PUB_REPO:-https://github.com/alexhegit/tech-blog-pub.git}"
+PUB_REPO="${PUB_REPO:-https://github.com/rocPAI-Forge/tech-blog-pub.git}"
 SITE_REPO="${SITE_REPO:-https://github.com/rocPAI-Forge/rocPAI-Forge.github.io.git}"
 
 echo "==> Work directory: $WORK_DIR"
