@@ -1,0 +1,145 @@
+# =============================================================================
+# SO-101 SimStudio - Keyboard Recording Config Template
+# =============================================================================
+# Usage:
+#   1. Run: uv run python -m simstudio.scripts.record --config configs/so101_mujoco_keyboard.yaml
+#   2. Copy: cp configs/so101_mujoco_keyboard.yaml configs/my_config.yaml
+#   3. Override: --config ... --dataset.num_episodes 5 --resume true
+#
+# View mode: --view_mode mujoco (default, low latency) | rerun (camera feeds)
+# Both modes write LeRobot dataset v3.0.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Robot Configuration
+# -----------------------------------------------------------------------------
+robot:
+  type: so101_mujoco
+  action_mode: velocity                    # velocity | position
+  xml_path: SO101/scenes/simple_pick/scene.xml           # MuJoCo scene XML
+  cube_positions_path: configs/scenes/simple_pick/cube_positions.json  # Cube initial positions JSON
+  
+  # Frame rates
+  record_fps: 30                           # Record FPS
+  control_fps: 180                         # Control loop FPS
+  physics_fps: 360                         # Physics timestep FPS
+  
+  # Camera
+  camera_width: 640                        # Camera width
+  camera_height: 480                       # Camera height
+  camera_names: [front, top, wrist]        # Camera names
+  show_collision_geometry: false            # Show collision meshes in viewer
+  render_window: true                      # Render GLFW window
+  reset_mode: auto                         # auto: reset arm + cube before each episode
+  
+  # Motion parameters
+  lin_speed: 0.04                          # Linear speed
+  yaw_speed: 1.20                          # Yaw speed
+  grip_speed: 0.7                          # Gripper speed
+  ori_gain: 6.0                            # Orientation gain
+  
+  # Tilt parameters
+  tilt_deadzone: 0.03                      # Tilt deadzone
+  tilt_wmax: 6.0                           # Max tilt angular rate
+  
+  # IK parameters
+  lambda_pos: 0.01                         # Position IK damping
+  lambda_tilt: 0.0001                      # Tilt IK damping
+  vel_limit: 0.5                           # Joint velocity limit
+  vel_limit_wrist: 8.0                     # Wrist velocity limit
+  
+  # Smoothing
+  smooth_dq: 0.30                          # Joint velocity smoothing
+  smooth_dq_wrist: 0.08                    # Wrist velocity smoothing
+  wrist_gff_gain: 0.5                      # Wrist gravity-comp gain
+  
+  # Table and clearance
+  table_z: 0.0                             # Table Z height
+  clearance: 0.07                          # EE clearance above table
+  
+  # End effector
+  ee_site_name: wrist_site                 # End-effector site name
+  tool_axis_site: [0.0, -1.0, 0.0]        # Tool axis in site frame
+
+# -----------------------------------------------------------------------------
+# Teleoperation Configuration
+# -----------------------------------------------------------------------------
+teleop:
+  type: so101_keyboard                     # Teleop plugin type
+
+# -----------------------------------------------------------------------------
+# Dataset Configuration
+# -----------------------------------------------------------------------------
+dataset:
+  # Dataset identification
+  repo_id: alexhegit/so101_mujoco_keyboard_test  # HuggingFace dataset repo id
+  root: ./datasets/keyboard-test                 # Local dataset root
+  single_task: "SO-101 MuJoCo keyboard manipulation (simple_pick)"  # Task label in dataset
+  
+  # Recording parameters
+  fps: 30                                  # Record FPS
+  episode_time_s: 120                      # Max seconds per episode
+  reset_time_s: 3                          # Seconds between episodes (manual reposition window)
+  num_episodes: 3                          # Target episode count
+  
+  # Video settings
+  video: true                              # Encode episode videos
+  
+  # HuggingFace Hub
+  push_to_hub: false                       # Push dataset to Hub on save
+  private: false                           # Private Hub repo
+  tags: null                               # Hub tags
+  
+  # Performance tuning
+  num_image_writer_processes: 0            # Image writer processes (0 = threads only)
+  num_image_writer_threads_per_camera: 4   # Image writer threads per camera
+  video_encoding_batch_size: 1             # Video encode batch size
+  streaming_encoding: false                # Stream encode while recording
+  
+  # Encoder settings
+  encoder_queue_maxsize: 30                # Encoder queue max size
+  encoder_threads: null                    # Encoder thread count
+  
+  # RGB encoder
+  rgb_encoder:
+    vcodec: libsvtav1                      # Video codec
+    pix_fmt: yuv420p                       # Pixel format
+    g: 2                                   # GOP size
+    crf: 30                                # CRF quality (lower = better)
+    preset: 12                             # Encoder preset (higher = slower)
+    fast_decode: 0                         # Fast decode tuning
+    video_backend: pyav                    # Video backend
+    extra_options: {}                      # Extra encoder options
+  
+  # Depth encoder (if using depth cameras)
+  depth_encoder:
+    vcodec: hevc                           # Video codec
+    pix_fmt: gray12le                      # Pixel format
+    g: 2                                   # GOP size
+    crf: 30                                # CRF quality
+    preset: null                           # Encoder preset
+    fast_decode: 0                         # Fast decode tuning
+    shift: 3.5                             # Depth shift
+    use_log: true                          # Log-scale depth
+    video_backend: pyav                    # Video backend
+    extra_options:
+      x265-params: lossless                # x265 options
+
+# -----------------------------------------------------------------------------
+# Display Settings
+# -----------------------------------------------------------------------------
+display_data: false                        # Stream all cameras to display
+display_mode: rerun                        # rerun | opencv
+display_ip: null                           # Remote Rerun server IP
+display_port: null                         # Remote Rerun server port
+display_compressed_images: false           # Show compressed images in Rerun
+
+# -----------------------------------------------------------------------------
+# Audio Settings
+# -----------------------------------------------------------------------------
+play_sounds: false                         # Play LeRobot UI sounds
+
+# -----------------------------------------------------------------------------
+# Recording Control
+# -----------------------------------------------------------------------------
+resume: false                              # Resume existing dataset on disk
