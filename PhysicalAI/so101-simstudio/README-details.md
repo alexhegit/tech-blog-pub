@@ -123,6 +123,8 @@ LeRobot 生态里已有 SO-101 真机栈，但 **ROCm-first、开箱即用的 SO
 </tr>
 </table>
 
+![在 AMD Ryzen AI Max+ 395 上运行](assets/images/platform-ryzen-ai.jpg)
+
 > Hugo 官网 sync 时，`assets/gifs/*.gif` 会优先配对 `assets/videos/<同名>.mp4` 生成循环
 > `<video>`；GitHub 上 gif 为静帧封面，mp4 提供动画源。
 
@@ -295,6 +297,8 @@ Three teleop modes side by side:
 <td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Leader teleop](assets/gifs/teleop-leader.gif)</td>
 </tr>
 </table>
+
+![Running on AMD Ryzen AI Max+ 395](assets/images/platform-ryzen-ai.jpg)
 
 ### 3. v0.1.2 feature matrix
 
