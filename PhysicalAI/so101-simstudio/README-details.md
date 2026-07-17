@@ -103,16 +103,25 @@ LeRobot 生态里已有 SO-101 真机栈，但 **ROCm-first、开箱即用的 SO
 | --- | --- | --- |
 | `gifs/hero-intro.gif` + `videos/hero-intro.mp4` | 0–3s | 标题页 |
 | `gifs/teleop-leader.gif` + `videos/teleop-leader.mp4` | 4.5–8.5s | Leader 臂 teleop |
-| `gifs/teleop-joycon.gif` + `videos/teleop-joycon.mp4` | 9.5–13.5s | Joy-Con teleop |
-| `gifs/teleop-keyboard.gif` + `videos/teleop-keyboard.mp4` | 12–16s | 键盘 teleop |
+| `gifs/teleop-joycon.gif` + `videos/teleop-joycon.mp4` | 9.5–11.7s | Joy-Con teleop（截断于 “with Keyboard” 前） |
+| `gifs/teleop-keyboard.gif` + `videos/teleop-keyboard.mp4` | 12.2–14.7s | 键盘 teleop（截断于 “Ryzen AI Max+ 395” 前） |
 | `images/platform-ryzen-ai.jpg` | ~15s | Ryzen AI 平台展示 |
 | `images/teleop-*.jpg` | 各段最佳静帧 | 文档 / 社交转发 |
 
 三种 teleop 实拍对比：
 
-| 键盘 | Joy-Con | Leader |
-| --- | --- | --- |
-| ![键盘 teleop](assets/gifs/teleop-keyboard.gif) | ![Joy-Con teleop](assets/gifs/teleop-joycon.gif) | ![Leader teleop](assets/gifs/teleop-leader.gif) |
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+<th style="text-align:center;padding:.5rem;">键盘</th>
+<th style="text-align:center;padding:.5rem;">Joy-Con</th>
+<th style="text-align:center;padding:.5rem;">Leader</th>
+</tr>
+<tr>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![键盘 teleop](assets/gifs/teleop-keyboard.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Joy-Con teleop](assets/gifs/teleop-joycon.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Leader teleop](assets/gifs/teleop-leader.gif)</td>
+</tr>
+</table>
 
 > Hugo 官网 sync 时，`assets/gifs/*.gif` 会优先配对 `assets/videos/<同名>.mp4` 生成循环
 > `<video>`；GitHub 上 gif 为静帧封面，mp4 提供动画源。
@@ -268,15 +277,24 @@ Demo clip `SO101-SimStudio-Demo01.mp4` (~27s, 1080p) was sliced into this post's
 | --- | --- | --- |
 | `gifs/hero-intro.gif` + `videos/hero-intro.mp4` | 0–3s | Title card |
 | `gifs/teleop-leader.gif` + `videos/teleop-leader.mp4` | 4.5–8.5s | Leader teleop |
-| `gifs/teleop-joycon.gif` + `videos/teleop-joycon.mp4` | 9.5–13.5s | Joy-Con teleop |
-| `gifs/teleop-keyboard.gif` + `videos/teleop-keyboard.mp4` | 12–16s | Keyboard teleop |
+| `gifs/teleop-joycon.gif` + `videos/teleop-joycon.mp4` | 9.5–11.7s | Joy-Con teleop (ends before “with Keyboard”) |
+| `gifs/teleop-keyboard.gif` + `videos/teleop-keyboard.mp4` | 12.2–14.7s | Keyboard teleop (ends before “Ryzen AI Max+ 395”) |
 | `images/platform-ryzen-ai.jpg` | ~15s | Ryzen AI platform shot |
 
 Three teleop modes side by side:
 
-| Keyboard | Joy-Con | Leader |
-| --- | --- | --- |
-| ![Keyboard teleop](assets/gifs/teleop-keyboard.gif) | ![Joy-Con teleop](assets/gifs/teleop-joycon.gif) | ![Leader teleop](assets/gifs/teleop-leader.gif) |
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+<th style="text-align:center;padding:.5rem;">Keyboard</th>
+<th style="text-align:center;padding:.5rem;">Joy-Con</th>
+<th style="text-align:center;padding:.5rem;">Leader</th>
+</tr>
+<tr>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Keyboard teleop](assets/gifs/teleop-keyboard.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Joy-Con teleop](assets/gifs/teleop-joycon.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Leader teleop](assets/gifs/teleop-leader.gif)</td>
+</tr>
+</table>
 
 ### 3. v0.1.2 feature matrix
 

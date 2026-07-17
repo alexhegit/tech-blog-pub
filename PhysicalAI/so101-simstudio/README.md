@@ -36,12 +36,23 @@
 
 v0.1.2 支持三种 teleop，同一套 LeRobot v3.0 录制 pipeline。以下片段来自项目 demo 视频（`SO101-SimStudio-Demo01.mp4`）：
 
-| 键盘 · Keyboard | Joy-Con | Leader 臂 · Leader arm |
-| --- | --- | --- |
-| ![键盘速度控制](assets/gifs/teleop-keyboard.gif) | ![Joy-Con 柱坐标控制](assets/gifs/teleop-joycon.gif) | ![真实 Leader 位置映射](assets/gifs/teleop-leader.gif) |
-| 世界系速度（WASD） | 柱坐标 reach/swing；单手录制 | Feetech STS3215，1:1 位置映射 |
-
-![在 AMD Ryzen AI Max+ 395 上运行 / Running on AMD Ryzen AI Max+ 395](assets/images/platform-ryzen-ai.jpg)
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+<th style="text-align:center;padding:.5rem;">键盘 · Keyboard</th>
+<th style="text-align:center;padding:.5rem;">Joy-Con</th>
+<th style="text-align:center;padding:.5rem;">Leader 臂 · Leader arm</th>
+</tr>
+<tr>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![键盘速度控制](assets/gifs/teleop-keyboard.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Joy-Con 柱坐标控制](assets/gifs/teleop-joycon.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![真实 Leader 位置映射](assets/gifs/teleop-leader.gif)</td>
+</tr>
+<tr>
+<td style="text-align:center;padding:.5rem;font-size:.9rem;">世界系速度（WASD）</td>
+<td style="text-align:center;padding:.5rem;font-size:.9rem;">柱坐标 reach/swing；单手录制</td>
+<td style="text-align:center;padding:.5rem;font-size:.9rem;">Feetech STS3215，1:1 位置映射</td>
+</tr>
+</table>
 
 ### 架构一图流
 
@@ -105,12 +116,23 @@ I'm also an **AMD ROCm** developer. Simulation matters just as much for robot ph
 
 v0.1.2 ships three teleop backends on the same LeRobot v3.0 recording pipeline. Clips from project demo video (`SO101-SimStudio-Demo01.mp4`):
 
-| Keyboard | Joy-Con | Leader arm |
-| --- | --- | --- |
-| ![Keyboard velocity control](assets/gifs/teleop-keyboard.gif) | ![Joy-Con cylindrical control](assets/gifs/teleop-joycon.gif) | ![Real leader position mapping](assets/gifs/teleop-leader.gif) |
-| World-frame velocity (WASD) | Cylindrical reach/swing; one-handed record | Feetech STS3215, 1:1 position mapping |
-
-![Running on AMD Ryzen AI Max+ 395](assets/images/platform-ryzen-ai.jpg)
+<table style="width:100%;border-collapse:collapse;">
+<tr>
+<th style="text-align:center;padding:.5rem;">Keyboard</th>
+<th style="text-align:center;padding:.5rem;">Joy-Con</th>
+<th style="text-align:center;padding:.5rem;">Leader arm</th>
+</tr>
+<tr>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Keyboard velocity control](assets/gifs/teleop-keyboard.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Joy-Con cylindrical control](assets/gifs/teleop-joycon.gif)</td>
+<td style="text-align:center;padding:.5rem;vertical-align:top;width:33%;">![Real leader position mapping](assets/gifs/teleop-leader.gif)</td>
+</tr>
+<tr>
+<td style="text-align:center;padding:.5rem;font-size:.9rem;">World-frame velocity (WASD)</td>
+<td style="text-align:center;padding:.5rem;font-size:.9rem;">Cylindrical reach/swing; one-handed record</td>
+<td style="text-align:center;padding:.5rem;font-size:.9rem;">Feetech STS3215, 1:1 position mapping</td>
+</tr>
+</table>
 
 ### Architecture at a glance
 

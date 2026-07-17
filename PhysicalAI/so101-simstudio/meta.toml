@@ -2,7 +2,7 @@
 # 只影响网站发布,不影响本仓库在 GitHub 上的阅读。
 slug = "so101-simstudio"
 date = 2026-07-16
-author = "rocPAI-Lab: Alex He"
+author = "rocPAI-Lab"
 tags = ["ROCm", "LeRobot", "MuJoCo", "SO-101"]
 title_zh = "SO-101 SimStudio：在 AMD ROCm 上打开机器人物理 AI 之门"
 title_en = "SO-101 SimStudio: Opening the Door to Robot Physical AI on AMD ROCm"
